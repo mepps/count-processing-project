@@ -16,12 +16,16 @@
 //  fs.enter(); 
 //}
 
-int a = 1;
+int pageCount = 1;
 int y = 100;
+int likeCount = 0;
 
 // The statements in the setup() function 
 // execute once when the program begins
 void setup() {
+  if (frame != null) {
+    frame.setResizable(true);
+  }
   size(1060, 640);  // Size must be the first statement
   stroke(255);     // Set line drawing color to white
   frameRate(30);
@@ -32,14 +36,17 @@ void draw(){
     font = loadFont("LiGothicMed-48.vlw");
     textFont(font, 32);
     background(255);
-    String n = Integer.toString(a);
+    String pageCountS = Integer.toString(pageCount);
+    String likeCountS = Integer.toString(likeCount);
     int max = 10000000;
     String maxString = Integer.toString(max);
-    println(max);
-    if (a < max){
-      fill(172);
-      textSize(400); 
-      text(n, 530, 320);
+    fill(172);
+    textSize(200); 
+    if (pageCount < max){
+      stroke(#5CDEFC);
+      strokeWeight(5);
+      line(10, 330, pageCount*2 + 10, 330);
+      text(pageCountS, 580, 320);
       int random = (int)(Math.random() * 2000 + 33);
       println(random);
       try {
@@ -47,7 +54,9 @@ void draw(){
       } catch(InterruptedException ex) {
         Thread.currentThread().interrupt();
       }
-      a++;
+      pageCount++;
     }
-    text(n, 530, 320);
+    else{
+      text(pageCountS, 580, 320);
+    }
   }
